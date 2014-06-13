@@ -1,0 +1,35 @@
+<div class="pull-right">
+  [<%= link_to 'edit this post', edit_post_path(@post) %>]
+</div>
+
+<p>
+  <%= render @post.categories %>
+</p>
+
+<%= render 'shared/content_title', title: 'Create a new post' %>
+
+<h5>title:</h5><p><%= @post.title %></p>
+<h5>url:</h5><p><<%= @post.url %></p>
+
+<h5>Create a comment</h5>
+<% if @comment.errors.any? %>
+<div class="alert alert-error">
+  <ul>
+    <% @comment.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<%= form_for [@post, @comment] do |f| %>
+    <%= f.label :body, 'Leave a comment' %>
+    <%= f.text_area :body %>
+    <br />
+    <%= f.submit 'Create Comment', class: 'btn btn-primary' %>
+<% end %>
+
+<h5>Comments:</h5>
+<% @post.comments.each do |comment| %>
+    <%= render 'comments/comment', comment: comment  %>
+<% end %>
