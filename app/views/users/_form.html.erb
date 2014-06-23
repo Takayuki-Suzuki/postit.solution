@@ -11,6 +11,11 @@
         <%= f.password_field :password %>
       </div>
 
+      <div class="control-group">
+        <%= f.label :time_zome %>
+        <%= f.time_zone_select :time_zone, ActiveSupport::TimeZone.all, default: Time.zone.name %>
+      </div>
+
       <%= f.submit(@user.new_record? ? 'Register' : 'Edit', class: 'btn btn-primary') %>
   <% end %>
 </div>
